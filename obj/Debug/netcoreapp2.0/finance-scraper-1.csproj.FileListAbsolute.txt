@@ -1,0 +1,11 @@
+/Users/JuanCMontoya/Projects/vscode/csharp/finance-scraper-1/bin/Debug/netcoreapp2.0/finance-scraper-1.deps.json
+/Users/JuanCMontoya/Projects/vscode/csharp/finance-scraper-1/bin/Debug/netcoreapp2.0/finance-scraper-1.runtimeconfig.json
+/Users/JuanCMontoya/Projects/vscode/csharp/finance-scraper-1/bin/Debug/netcoreapp2.0/finance-scraper-1.runtimeconfig.dev.json
+/Users/JuanCMontoya/Projects/vscode/csharp/finance-scraper-1/bin/Debug/netcoreapp2.0/finance-scraper-1.dll
+/Users/JuanCMontoya/Projects/vscode/csharp/finance-scraper-1/bin/Debug/netcoreapp2.0/finance-scraper-1.pdb
+/Users/JuanCMontoya/Projects/vscode/csharp/finance-scraper-1/obj/Debug/netcoreapp2.0/finance-scraper-1.csprojAssemblyReference.cache
+/Users/JuanCMontoya/Projects/vscode/csharp/finance-scraper-1/obj/Debug/netcoreapp2.0/finance-scraper-1.csproj.CoreCompileInputs.cache
+/Users/JuanCMontoya/Projects/vscode/csharp/finance-scraper-1/obj/Debug/netcoreapp2.0/finance-scraper-1.AssemblyInfoInputs.cache
+/Users/JuanCMontoya/Projects/vscode/csharp/finance-scraper-1/obj/Debug/netcoreapp2.0/finance-scraper-1.AssemblyInfo.cs
+/Users/JuanCMontoya/Projects/vscode/csharp/finance-scraper-1/obj/Debug/netcoreapp2.0/finance-scraper-1.dll
+/Users/JuanCMontoya/Projects/vscode/csharp/finance-scraper-1/obj/Debug/netcoreapp2.0/finance-scraper-1.pdb

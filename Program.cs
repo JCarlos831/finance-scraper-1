@@ -17,6 +17,8 @@ namespace finance_scraper_1
     {
         public static void Main(string[] args)
         {
+            CreateWebHostBuilder(args).Build().Run();
+
             FirefoxDriverService service = FirefoxDriverService.CreateDefaultService("/Users/JuanCMontoya/Projects/vscode/csharp/finance-scraper-1/bin/Debug/netcoreapp2.1");
             var driver = new FirefoxDriver(service);
 
@@ -26,13 +28,13 @@ namespace finance_scraper_1
             // Maximize the window.
             driver.Manage().Window.Maximize();
             
-            // If element cannot be found in ten seconds, timeout.
+            // If element cannot be found in three seconds, timeout.
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(3);
 
             // Find username text box, enter username, and press Enter.
             driver.FindElement(By.Id("login-username")).SendKeys("testfinance@yahoo.com" + Keys.Enter);
 
-            // If element cannot be found in ten seconds, timeout.
+            // If element cannot be found in three seconds, timeout.
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(3);
 
             // Find password text box, enter password, and press Enter.
@@ -45,7 +47,10 @@ namespace finance_scraper_1
             // Click the 'x' on the pop up box
             driver.FindElement(By.XPath("/html/body/div[2]/div[3]/section/section/div[2]/table/tbody/tr[1]/td[1]/a")).Click();
 
-            // If element cannot be found in ten seconds, timeout.
+            // Path to write data to
+            string path = @"/Users/JuanCMontoya/Desktop/testScrape.csv";
+
+            // If element cannot be found in three seconds, timeout.
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(3);
 
             // Find table with stock data
@@ -58,7 +63,7 @@ namespace finance_scraper_1
             // Get Table Headers
             String strThData = "";
             // get table header for stock symbols
-            strThData = strThData + driver.FindElement(By.XPath("/html/body/div[2]/div[3]/section/section[2]/div[1]/table/thead/tr/th[1]/span")).Text + "\t";
+            strThData = strThData + driver.FindElement(By.XPath("/html/body/div[2]/div[3]/section/section[2]/div[1]/table/thead/tr/th[1]")).Text + "\t";
             // get table header for last price
             strThData = strThData + driver.FindElement(By.XPath("/html/body/div[2]/div[3]/section/section[2]/div[1]/table/thead/tr/th[2]")).Text + "\t";
             // get table header for change
@@ -86,6 +91,9 @@ namespace finance_scraper_1
             // print table headers to console
             System.Console.WriteLine(strThData);
 
+            //print table headers to file
+            File.AppendAllText(path, strThData);
+
             // Go through each row
             foreach (var row in rows)
             {
@@ -97,17 +105,20 @@ namespace finance_scraper_1
                     foreach (var elemTd in lstTdElem)
                     {
                         // Add text found from each cell to strRowData
-                        strRowData = strRowData + elemTd.Text + "\t";
+                        strRowData = strRowData + elemTd.Text + "\t\t";
                     }
                 }
                 else
 				{
 					// To print the data into the console and tab space between text
-					Console.WriteLine(rows[0].Text.Replace(" ", "\t"));
+					Console.WriteLine(rows[0].Text.Replace(" ", "\t\t"));
+
 				}
 
                 // Print the data to the console
 				System.Console.WriteLine(strRowData);
+
+                File.AppendAllText(path, strRowData);
 
                 // 
 				strRowData = String.Empty;
@@ -118,5 +129,9 @@ namespace finance_scraper_1
 
             driver.Close();  
         }
+
+        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
+            WebHost.CreateDefaultBuilder(args)
+                .UseStartup<Startup>();
     }
 }

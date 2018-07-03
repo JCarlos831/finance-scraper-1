@@ -63,31 +63,31 @@ namespace finance_scraper_1
             // Get Table Headers
             String strThData = "";
             // get table header for stock symbols
-            strThData = strThData + driver.FindElement(By.XPath("/html/body/div[2]/div[3]/section/section[2]/div[1]/table/thead/tr/th[1]")).Text + "\t";
+            strThData = strThData + driver.FindElement(By.XPath("/html/body/div[2]/div[3]/section/section[2]/div[1]/table/thead/tr/th[1]")).Text + ",";
             // get table header for last price
-            strThData = strThData + driver.FindElement(By.XPath("/html/body/div[2]/div[3]/section/section[2]/div[1]/table/thead/tr/th[2]")).Text + "\t";
+            strThData = strThData + driver.FindElement(By.XPath("/html/body/div[2]/div[3]/section/section[2]/div[1]/table/thead/tr/th[2]")).Text + ",";
             // get table header for change
-            strThData = strThData + driver.FindElement(By.XPath("/html/body/div[2]/div[3]/section/section[2]/div[1]/table/thead/tr/th[3]")).Text + "\t";
+            strThData = strThData + driver.FindElement(By.XPath("/html/body/div[2]/div[3]/section/section[2]/div[1]/table/thead/tr/th[3]")).Text + ",";
             // get table header for %chg
-            strThData = strThData + driver.FindElement(By.XPath("/html/body/div[2]/div[3]/section/section[2]/div[1]/table/thead/tr/th[4]")).Text + "\t";
+            strThData = strThData + driver.FindElement(By.XPath("/html/body/div[2]/div[3]/section/section[2]/div[1]/table/thead/tr/th[4]")).Text + ",";
             // get table header for currency
-            strThData = strThData + driver.FindElement(By.XPath("/html/body/div[2]/div[3]/section/section[2]/div[1]/table/thead/tr/th[5]")).Text + "\t";
+            strThData = strThData + driver.FindElement(By.XPath("/html/body/div[2]/div[3]/section/section[2]/div[1]/table/thead/tr/th[5]")).Text + ",";
             // get table header for market time
-            strThData = strThData + driver.FindElement(By.XPath("/html/body/div[2]/div[3]/section/section[2]/div[1]/table/thead/tr/th[6]")).Text + "\t";
+            strThData = strThData + driver.FindElement(By.XPath("/html/body/div[2]/div[3]/section/section[2]/div[1]/table/thead/tr/th[6]")).Text + ",";
             // get table header for volume
-            strThData = strThData + driver.FindElement(By.XPath("/html/body/div[2]/div[3]/section/section[2]/div[1]/table/thead/tr/th[7]")).Text + "\t";
+            strThData = strThData + driver.FindElement(By.XPath("/html/body/div[2]/div[3]/section/section[2]/div[1]/table/thead/tr/th[7]")).Text + ",";
             // get table header for shares
-            strThData = strThData + driver.FindElement(By.XPath("/html/body/div[2]/div[3]/section/section[2]/div[1]/table/thead/tr/th[8]")).Text + "\t";
+            strThData = strThData + driver.FindElement(By.XPath("/html/body/div[2]/div[3]/section/section[2]/div[1]/table/thead/tr/th[8]")).Text + ",";
             // get table header for avg volume (3m)
-            strThData = strThData + driver.FindElement(By.XPath("/html/body/div[2]/div[3]/section/section[2]/div[1]/table/thead/tr/th[9]")).Text + "\t";
-            // get table header for day range
-            strThData = strThData + driver.FindElement(By.XPath("/html/body/div[2]/div[3]/section/section[2]/div[1]/table/thead/tr/th[10]")).Text + "\t";
-            // get table header for 52-wk range
-            strThData = strThData + driver.FindElement(By.XPath("/html/body/div[2]/div[3]/section/section[2]/div[1]/table/thead/tr/th[11]")).Text + "\t";
-            // get table header for day chart
-            strThData = strThData + driver.FindElement(By.XPath("/html/body/div[2]/div[3]/section/section[2]/div[1]/table/thead/tr/th[12]")).Text + "\t";
+            strThData = strThData + driver.FindElement(By.XPath("/html/body/div[2]/div[3]/section/section[2]/div[1]/table/thead/tr/th[9]")).Text + ",";
+            // // get table header for day range
+            // strThData = strThData + driver.FindElement(By.XPath("/html/body/div[2]/div[3]/section/section[2]/div[1]/table/thead/tr/th[10]")).Text + ",";
+            // // get table header for 52-wk range
+            // strThData = strThData + driver.FindElement(By.XPath("/html/body/div[2]/div[3]/section/section[2]/div[1]/table/thead/tr/th[11]")).Text + ",";
+            // // get table header for day chart
+            // strThData = strThData + driver.FindElement(By.XPath("/html/body/div[2]/div[3]/section/section[2]/div[1]/table/thead/tr/th[12]")).Text + ",";
             // get table header for market cap
-            strThData = strThData + driver.FindElement(By.XPath("/html/body/div[2]/div[3]/section/section[2]/div[1]/table/thead/tr/th[13]")).Text;
+            strThData = strThData + driver.FindElement(By.XPath("/html/body/div[2]/div[3]/section/section[2]/div[1]/table/thead/tr/th[13]")).Text + "\n";
             // print table headers to console
             System.Console.WriteLine(strThData);
 
@@ -95,37 +95,47 @@ namespace finance_scraper_1
             File.AppendAllText(path, strThData);
 
             // Go through each row
-            foreach (var row in rows)
+            // foreach (var row in rows)
+            // {
+            for (int j = 1; j < rows.Count + 1; j++)
             {
                 // Get the columns from a particular row
-                List<IWebElement> lstTdElem = new List<IWebElement>(row.FindElements(By.TagName("td")));
+                List<IWebElement> lstTdElem = new List<IWebElement>(rows[j].FindElements(By.TagName("td")));
                 if (lstTdElem.Count > 0)
                 {
-                    // Go through each column
-                    foreach (var elemTd in lstTdElem)
+                    // // Go through each column
+                    // foreach (var elemTd in lstTdElem)
+                    // {
+                    //     // Add text found from each cell to strRowData
+                    //     strRowData = strRowData + elemTd.Text + ",";
+                    // }
+
+                    for (int i = 0; i < 9; i++)
                     {
-                        // Add text found from each cell to strRowData
-                        strRowData = strRowData + elemTd.Text + "\t\t";
+                        strRowData = strRowData + lstTdElem[i].Text + ",";
                     }
                 }
                 else
 				{
-					// To print the data into the console and tab space between text
-					Console.WriteLine(rows[0].Text.Replace(" ", "\t\t"));
+					// To print the data into the console and add comma between text
 
+					Console.WriteLine(rows[0].Text.Replace(" ", ","));
+                    File.AppendAllText(path, rows[0].Text.Replace(" ", ","));
 				}
 
                 // Print the data to the console
 				System.Console.WriteLine(strRowData);
 
-                File.AppendAllText(path, strRowData);
+                File.AppendAllText(path, strRowData + driver.FindElement(By.XPath("/html/body/div[2]/div[3]/section/section[2]/div[2]/table/tbody/tr[1]/td[13]/span")).Text + "\n");
 
                 // 
 				strRowData = String.Empty;
                 System.Console.WriteLine(strRowData);
             }
+            
+                
 
-            System.Console.WriteLine("\n");
+            // System.Console.WriteLine("\n");
 
             driver.Close();  
         }

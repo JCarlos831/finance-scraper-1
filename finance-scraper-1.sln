@@ -1,0 +1,17 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2017
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "finance-scraper-1", "finance-scraper-1.csproj", "{317DCB36-2A19-4C11-9DD2-202EFEF85594}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{317DCB36-2A19-4C11-9DD2-202EFEF85594}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{317DCB36-2A19-4C11-9DD2-202EFEF85594}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{317DCB36-2A19-4C11-9DD2-202EFEF85594}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{317DCB36-2A19-4C11-9DD2-202EFEF85594}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

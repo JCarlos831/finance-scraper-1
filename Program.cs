@@ -1,15 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.Support.UI;
 
 namespace finance_scraper_1
 {
@@ -20,7 +14,9 @@ namespace finance_scraper_1
             CreateWebHostBuilder(args).Build().Run();
 
             FirefoxDriverService service = FirefoxDriverService.CreateDefaultService("/Users/JuanCMontoya/Projects/vscode/csharp/finance-scraper-1/bin/Debug/netcoreapp2.1");
-            var driver = new FirefoxDriver(service);
+            FirefoxOptions options = new FirefoxOptions();
+            options.AddArgument("--headless");
+            var driver = new FirefoxDriver(service, options);
 
             // Open the browser and navigate to the Yahoo! Finance login page.
             driver.Url = "https://login.yahoo.com/config/login?.intl=us&.lang=en-US&.src=finance&.done=https%3A%2F%2Ffinance.yahoo.com%2F";
@@ -48,7 +44,7 @@ namespace finance_scraper_1
             driver.FindElement(By.XPath("/html/body/div[2]/div[3]/section/section/div[2]/table/tbody/tr[1]/td[1]/a")).Click();
 
             // Path to write data to
-            string path = @"/Users/JuanCMontoya/Desktop/testScrape.csv";
+            // string path = @"/Users/JuanCMontoya/Desktop/testScrape.csv";
 
             // If element cannot be found in three seconds, timeout.
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(3);
@@ -89,15 +85,15 @@ namespace finance_scraper_1
             // get table header for market cap
             strThData = strThData + driver.FindElement(By.XPath("/html/body/div[2]/div[3]/section/section[2]/div[1]/table/thead/tr/th[13]")).Text + "\n";
             // print table headers to console
-            System.Console.WriteLine(strThData);
+            Console.WriteLine(strThData);
 
             //print table headers to file
-            File.AppendAllText(path, strThData);
+            // File.AppendAllText(path, strThData);
 
             // Go through each row
             // foreach (var row in rows)
             // {
-            for (int j = 1; j < rows.Count + 1; j++)
+            for (int j = 1; j < rows.Count; j++)
             {
                 // Get the columns from a particular row
                 List<IWebElement> lstTdElem = new List<IWebElement>(rows[j].FindElements(By.TagName("td")));
@@ -120,13 +116,13 @@ namespace finance_scraper_1
 					// To print the data into the console and add comma between text
 
 					Console.WriteLine(rows[0].Text.Replace(" ", ","));
-                    File.AppendAllText(path, rows[0].Text.Replace(" ", ","));
+                    // File.AppendAllText(path, rows[0].Text.Replace(" ", ","));
 				}
 
                 // Print the data to the console
 				System.Console.WriteLine(strRowData);
 
-                File.AppendAllText(path, strRowData + driver.FindElement(By.XPath("/html/body/div[2]/div[3]/section/section[2]/div[2]/table/tbody/tr[1]/td[13]/span")).Text + "\n");
+                // File.AppendAllText(path, strRowData + driver.FindElement(By.XPath("/html/body/div[2]/div[3]/section/section[2]/div[2]/table/tbody/tr[1]/td[13]/span")).Text + "\n");
 
                 // 
 				strRowData = String.Empty;

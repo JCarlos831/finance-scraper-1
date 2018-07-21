@@ -9,12 +9,22 @@
       <e p="bundleconfig.json" t="Include" />
       <e p="Controllers" t="Include">
         <e p="HomeController.cs" t="Include" />
+        <e p="StocksController.cs" t="Include" />
       </e>
       <e p="finance-scraper-1.csproj" t="IncludeRecursive" />
       <e p="finance-scraper-1.sln" t="IncludeFlat" />
+      <e p="Migrations" t="Include">
+        <e p="20180721153739_InitialCreate.cs" t="Include" />
+        <e p="20180721153739_InitialCreate.Designer.cs" t="Include" />
+        <e p="MvcStockContextModelSnapshot.cs" t="Include" />
+      </e>
       <e p="Models" t="Include">
         <e p="ErrorViewModel.cs" t="Include" />
+        <e p="MvcStockContext.cs" t="Include" />
+        <e p="SeedData.cs" t="Include" />
+        <e p="Stocks.cs" t="Include" />
       </e>
+      <e p="MvcStocks.db" t="Include" />
       <e p="obj" t="ExcludeRecursive">
         <e p="Debug" t="Include">
           <e p="netcoreapp2.1" t="Include">
@@ -38,6 +48,13 @@
           <e p="_Layout.cshtml" t="Include" />
           <e p="_ValidationScriptsPartial.cshtml" t="Include" />
           <e p="Error.cshtml" t="Include" />
+        </e>
+        <e p="Stocks" t="Include">
+          <e p="Create.cshtml" t="Include" />
+          <e p="Delete.cshtml" t="Include" />
+          <e p="Details.cshtml" t="Include" />
+          <e p="Edit.cshtml" t="Include" />
+          <e p="Index.cshtml" t="Include" />
         </e>
       </e>
       <e p="wwwroot" t="Include">

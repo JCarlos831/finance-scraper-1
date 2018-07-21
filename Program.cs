@@ -1,7 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using finance_scraper_1.Models;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 
@@ -11,6 +16,27 @@ namespace finance_scraper_1
     {
         public static void Main(string[] args)
         {
+            var host = CreateWebHostBuilder(args).Build();
+
+            using (var scope = host.Services.CreateScope())
+            {
+                var services = scope.ServiceProvider;
+
+                try
+                {
+                    var context = services.GetRequiredService<MvcStockContext>();
+                    context.Database.Migrate();
+                    SeedData.Initialize(services);
+                }
+                catch (Exception ex)
+                {
+                    var logger = services.GetRequiredService<ILogger<Program>>();
+                    logger.LogError(ex, "An error occurred seeding the DB.");
+                }
+            }
+
+            host.Run();
+            
             CreateWebHostBuilder(args).Build().Run();
 
             FirefoxDriverService service = FirefoxDriverService.CreateDefaultService("/Users/JuanCMontoya/Projects/vscode/csharp/finance-scraper-1/bin/Debug/netcoreapp2.1");
@@ -44,7 +70,7 @@ namespace finance_scraper_1
             driver.FindElement(By.XPath("/html/body/div[2]/div[3]/section/section/div[2]/table/tbody/tr[1]/td[1]/a")).Click();
 
             // Path to write data to
-            // string path = @"/Users/JuanCMontoya/Desktop/testScrape.csv";
+            string path = @"/Users/JuanCMontoya/Desktop/testScrape.csv";
 
             // If element cannot be found in three seconds, timeout.
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(3);
@@ -73,22 +99,16 @@ namespace finance_scraper_1
             // get table header for volume
             strThData = strThData + driver.FindElement(By.XPath("/html/body/div[2]/div[3]/section/section[2]/div[1]/table/thead/tr/th[7]")).Text + ",";
             // get table header for shares
-            strThData = strThData + driver.FindElement(By.XPath("/html/body/div[2]/div[3]/section/section[2]/div[1]/table/thead/tr/th[8]")).Text + ",";
+//            strThData = strThData + driver.FindElement(By.XPath("/html/body/div[2]/div[3]/section/section[2]/div[1]/table/thead/tr/th[8]")).Text + ",";
             // get table header for avg volume (3m)
             strThData = strThData + driver.FindElement(By.XPath("/html/body/div[2]/div[3]/section/section[2]/div[1]/table/thead/tr/th[9]")).Text + ",";
-            // // get table header for day range
-            // strThData = strThData + driver.FindElement(By.XPath("/html/body/div[2]/div[3]/section/section[2]/div[1]/table/thead/tr/th[10]")).Text + ",";
-            // // get table header for 52-wk range
-            // strThData = strThData + driver.FindElement(By.XPath("/html/body/div[2]/div[3]/section/section[2]/div[1]/table/thead/tr/th[11]")).Text + ",";
-            // // get table header for day chart
-            // strThData = strThData + driver.FindElement(By.XPath("/html/body/div[2]/div[3]/section/section[2]/div[1]/table/thead/tr/th[12]")).Text + ",";
             // get table header for market cap
-            strThData = strThData + driver.FindElement(By.XPath("/html/body/div[2]/div[3]/section/section[2]/div[1]/table/thead/tr/th[13]")).Text + "\n";
+            strThData = strThData + driver.FindElement(By.XPath("/html/body/div[2]/div[3]/section/section[2]/div[1]/table/thead/tr/th[13]")).Text + "," + "Date" + "\n";
             // print table headers to console
             Console.WriteLine(strThData);
 
             //print table headers to file
-            // File.AppendAllText(path, strThData);
+            File.AppendAllText(path, strThData);
 
             // Go through each row
             // foreach (var row in rows)
@@ -110,19 +130,20 @@ namespace finance_scraper_1
                     {
                         strRowData = strRowData + lstTdElem[i].Text + ",";
                     }
+                    
                 }
                 else
 				{
 					// To print the data into the console and add comma between text
 
 					Console.WriteLine(rows[0].Text.Replace(" ", ","));
-                    // File.AppendAllText(path, rows[0].Text.Replace(" ", ","));
+                    File.AppendAllText(path, rows[0].Text.Replace(" ", ","));
 				}
 
                 // Print the data to the console
 				System.Console.WriteLine(strRowData);
 
-                // File.AppendAllText(path, strRowData + driver.FindElement(By.XPath("/html/body/div[2]/div[3]/section/section[2]/div[2]/table/tbody/tr[1]/td[13]/span")).Text + "\n");
+                File.AppendAllText(path, strRowData + driver.FindElement(By.XPath("/html/body/div[2]/div[3]/section/section[2]/div[2]/table/tbody/tr[1]/td[13]/span")).Text + "," + DateTime.Today.ToShortDateString() + "\n");
 
                 // 
 				strRowData = String.Empty;

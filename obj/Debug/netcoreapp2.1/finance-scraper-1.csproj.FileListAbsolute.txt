@@ -28,3 +28,8 @@
 /Users/JuanCMontoya/Projects/vscode/csharp/finance-scraper-1/obj/Debug/netcoreapp2.1/finance-scraper-1.pdb
 /Users/JuanCMontoya/Projects/vscode/csharp/finance-scraper-1/obj/Debug/netcoreapp2.1/finance-scraper-1.csproj.CopyComplete
 /Users/JuanCMontoya/Projects/vscode/csharp/finance-scraper-1/obj/Debug/netcoreapp2.1/finance-scraper-1.csprojAssemblyReference.cache
+/Users/JuanCMontoya/Projects/vscode/csharp/finance-scraper-1/obj/Debug/netcoreapp2.1/Razor/Views/Stocks/Create.g.cshtml.cs
+/Users/JuanCMontoya/Projects/vscode/csharp/finance-scraper-1/obj/Debug/netcoreapp2.1/Razor/Views/Stocks/Delete.g.cshtml.cs
+/Users/JuanCMontoya/Projects/vscode/csharp/finance-scraper-1/obj/Debug/netcoreapp2.1/Razor/Views/Stocks/Details.g.cshtml.cs
+/Users/JuanCMontoya/Projects/vscode/csharp/finance-scraper-1/obj/Debug/netcoreapp2.1/Razor/Views/Stocks/Edit.g.cshtml.cs
+/Users/JuanCMontoya/Projects/vscode/csharp/finance-scraper-1/obj/Debug/netcoreapp2.1/Razor/Views/Stocks/Index.g.cshtml.cs
